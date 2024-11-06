@@ -5,9 +5,11 @@ const AxiosExample = () => {
 
     const [message, setMessage] = useState('');
 
+    const databasePrefix = 'http://localhost:3000'
+
     const fetchMessage = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/data/composting_values');
+            const response = await axios.get(databasePrefix + '/data/composting_values');
             console.log(JSON.stringify(response.data))
             setMessage(response.data);
         } catch (error) {
