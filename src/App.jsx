@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Map from './map.jsx'
 import CompostCounter from './CompostCounter.jsx'
+import AxiosExample from './AxiosExample.jsx'
 import './App.css'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <>
       <Map />
       <CompostCounter />
+      <AxiosExample />
     </>
   )
 }
