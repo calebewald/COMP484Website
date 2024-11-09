@@ -1,12 +1,12 @@
-import Map from './map.jsx'
-import CompostCounter from './CompostCounter.jsx'
 import './App.css'
+import MapParent from './MapParent.jsx'
+import CompostCounter from './CompostCounter.jsx'
 
 function App() {
 
   return (
     <>
-      <Map />
+      <MapParent />
       <CompostCounter />
     </>
   )

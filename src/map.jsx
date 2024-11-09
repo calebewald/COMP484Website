@@ -4,20 +4,23 @@ import 'leaflet/dist/leaflet.css'
 import { supabase } from './supabaseClient.js'
 
 
-const Map = () => {
+const Map = ({ listening, setListening, setLatLng }) => {
     const [bucketData, setBucketData] = useState([])
 
     // This component listens for clicks on the map
     const LocationMarkers = () => {
-        // used to click to make point, turn off for now
-        // useMapEvents({
-        //     click(e) {
-        //         setPopupPositions((prevPositions) => [
-        //             ...prevPositions, // Add new position to the array
-        //             e.latlng
-        //         ]);
-        //     },
-        // });
+        useMapEvents({
+            click(e) {
+                // setPopupPositions((prevPositions) => [
+                //     ...prevPositions, // Add new position to the array
+                //     e.latlng
+                // ]);
+                if (listening) {
+                    setLatLng(e.latlng)
+                    setListening(false)
+                }
+            },
+        });
 
         // Render markers for all stored popup positions
         // return popupPositions.map((position, index) => (
@@ -60,7 +63,20 @@ const Map = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <LocationMarkers /> {/* Listen for clicks and render markers for each click */}
+            <LocationMarkers />
+            {listening && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                        zIndex: 1000,
+                    }}
+                />
+            )}
         </MapContainer>
     );
 };

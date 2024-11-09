@@ -10,7 +10,6 @@ const CompostCounter = () => {
         const { data, error } = await supabase
             .from('composting_values')
             .select('*');
-        console.log(JSON.stringify(data, null, 2))
         setPounds(data[0].total_pounds)
         setBuckets(data[0].num_buckets)
     }
@@ -20,7 +19,7 @@ const CompostCounter = () => {
     }, []);
 
     return (
-        <div class="login-box">
+        <div className="login-box">
             <form action="/login" method="post">
                 <p>Number of Pounds YTD: {pounds}</p>
                 <p>Number of Buckets YTD: {buckets}</p>
