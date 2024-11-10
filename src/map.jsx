@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import { supabase } from './supabaseClient.js'
 
 
-const Map = ({ listening, setListening, setLatLng }) => {
+const Map = ({ editMode, listening, setListening, setLatLng, selectedMarker, setSelectedMarker }) => {
     const [bucketData, setBucketData] = useState([])
 
     // This component listens for clicks on the map
@@ -19,6 +19,8 @@ const Map = ({ listening, setListening, setLatLng }) => {
                     setLatLng(e.latlng)
                     setListening(false)
                 }
+
+
             },
         });
 
@@ -32,16 +34,30 @@ const Map = ({ listening, setListening, setLatLng }) => {
         // ));
 
         return bucketData.map((bucket, index) => {
-            return (<Marker key={index} position={[bucket.lat, bucket.lng]} >
+            return (<Marker
+                key={index}
+                position={[bucket.lat, bucket.lng]}
+                eventHandlers={{
+                    click: () => {
+                        if (editMode) {
+                            console.log(bucket.id)
+                            handleEditMarker(bucket.id);
+                        }
+                    }
+                }}>
                 <Popup>
                     building_name: {bucket.building_name} <br />
                     room_number: {bucket.room_number} <br />
-                    in_location: {bucket.in_location} <br />
+                    in_location: {bucket.in_location ? "Yes" : "No"} <br />
                     lat, lng: {bucket.lat}, {bucket.lng} <br />
                 </Popup>
             </Marker >)
         })
     };
+
+    function handleEditMarker(id) {
+        setSelectedMarker(id)
+    }
 
     // on load get all bucket info from db and update map accordingly
     async function fetchBucketData() {

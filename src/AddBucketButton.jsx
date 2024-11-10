@@ -26,13 +26,14 @@ const AddBucketButton = ({ setListening, latlng }) => {
     }
 
     function handleSubmit() {
-        // set loading
+        // implement set loading
+
         console.log(Object.values(formData).includes(undefined))
 
         // check validity of form
         if (Object.values(formData).includes(undefined)) {
             return
-            // set error message "one or more fields are empty"
+            // implement set error message "one or more fields are empty"
         }
         setBucketData()
         setClicked(!clicked)
@@ -51,47 +52,58 @@ const AddBucketButton = ({ setListening, latlng }) => {
             .single();
     }
 
-    useEffect(() => {
-        console.log(JSON.stringify(formData))
-    }, [formData])
+    // debug
+    // useEffect(() => {
+    //     console.log(JSON.stringify(formData))
+    // }, [formData])
 
     useEffect(() => {
-        setFormData({ ...formData, form_lat: latlng.lat, form_lng: latlng.lng })
+        if (latlng) {
+            setFormData({ ...formData, form_lat: latlng.lat, form_lng: latlng.lng })
+        }
     }, [latlng])
 
-    return (<div>
-        <button onClick={() => setClicked(!clicked)}>Add Bucket</button>
-        {clicked && <form>
-            <input type='text'
-                placeholder='Building Name'
-                onBlur={(e) => updateFormData(e.target.value, "building_name")}
-            ></input><br></br>
-            <input type='text' placeholder='Room Number/Location'
-                onBlur={(e) => updateFormData(e.target.value, "room_number")}></input><br></br>
-
-            <label>
-                In location?
-                <select onChange={(e) => updateFormData(e.target.value, "in_location")}
-                    style={{ marginLeft: '8px' }}>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </label>
-            <div>
-                Choose Position:
-                <button type="button" onClick={() => setListening(true)}
-                    style={{ marginLeft: '10px' }}>
-                    Select on Map
-                </button>
-            </div>
-            <div>
-                <button type="button" onClick={() => handleSubmit()}
-                    style={{ marginLeft: '10px' }}>
-                    Submit
-                </button>
-            </div>
-        </form>}
-    </div >)
+    return (
+        <div>
+            <button onClick={() => setClicked(!clicked)}>Add Bucket</button>
+            {clicked && <form>
+                <input
+                    type='text'
+                    placeholder='Building Name'
+                    onBlur={(e) => updateFormData(e.target.value, "building_name")}
+                ></input><br></br>
+                <input
+                    type='text'
+                    placeholder='Room Number/Location'
+                    onBlur={(e) => updateFormData(e.target.value, "room_number")}>
+                </input><br></br>
+                <label>
+                    In location?
+                    <select onChange={(e) => updateFormData(e.target.value, "in_location")}
+                        style={{ marginLeft: '8px' }}>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <div>
+                    Choose Position:
+                    <button
+                        type="button"
+                        onClick={() => setListening(true)}
+                        style={{ marginLeft: '10px' }}>
+                        Select on Map
+                    </button>
+                </div>
+                <div>
+                    <button
+                        type="button"
+                        onClick={() => handleSubmit()}
+                        style={{ marginLeft: '10px' }}>
+                        Submit
+                    </button>
+                </div>
+            </form>}
+        </div >)
 }
 
 export default AddBucketButton
