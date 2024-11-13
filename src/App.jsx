@@ -9,6 +9,7 @@ import MapDeletePage from './MapDeletePage.jsx'
 function App() {
 
   const htmlroutes = [
+    { path: '/', component: <MapPage /> },
     { path: '/map', component: <MapPage /> },
     { path: '/map_edit', component: <MapEditPage /> },
     { path: '/map_add', component: <MapAddPage /> },
