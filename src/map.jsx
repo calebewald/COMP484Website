@@ -74,7 +74,7 @@ const Map = ({ editMode, listening, setListening, setLatLng, selectedMarker, set
     const centerPosition = [42.29043180177482, -85.59973287209094];
 
     return (
-        <MapContainer center={centerPosition} zoom={17} scrollWheelZoom={false} style={{ height: '100vh', width: '100vh' }}>
+        <MapContainer center={centerPosition} zoom={17} scrollWheelZoom={false} style={{ height: '90vh', width: '100vw', flex: '1.5' }}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient.js'
+import './CompostCounter.css';
 
 const CompostCounter = () => {
     const [pounds, setPounds] = useState()
@@ -19,12 +20,15 @@ const CompostCounter = () => {
     }, []);
 
     return (
-        <div className="login-box">
-            <form action="/login" method="post">
-                <p>Number of Pounds YTD: {pounds}</p>
-                <p>Number of Buckets YTD: {buckets}</p>
+        <div className="container">
+            <form action="/login" method="post" className="form-box">
+                <div className="form-section">
+                    <h3>Statistics</h3>
+                    <p className="form-content">Number of Pounds Composted: {pounds}</p>
+                    <p className="form-content">Number of Buckets Composted: {buckets}</p>
+                </div>
             </form>
-        </div>
+        </div >
     )
 }
 

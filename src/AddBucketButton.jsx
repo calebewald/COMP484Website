@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient.js'
+import "./AddBucketButton.css"
 
 const AddBucketButton = ({ setListening, latlng }) => {
-    const [clicked, setClicked] = useState(false)
     const [formData, setFormData] = useState({
         form_building_name: undefined,
         form_room_number: undefined,
@@ -36,7 +36,6 @@ const AddBucketButton = ({ setListening, latlng }) => {
             // implement set error message "one or more fields are empty"
         }
         setBucketData()
-        setClicked(!clicked)
     }
 
     async function setBucketData() {
@@ -64,46 +63,41 @@ const AddBucketButton = ({ setListening, latlng }) => {
     }, [latlng])
 
     return (
-        <div>
-            <button onClick={() => setClicked(!clicked)}>Add Bucket</button>
-            {clicked && <form>
-                <input
-                    type='text'
-                    placeholder='Building Name'
-                    onBlur={(e) => updateFormData(e.target.value, "building_name")}
-                ></input><br></br>
-                <input
-                    type='text'
-                    placeholder='Room Number/Location'
-                    onBlur={(e) => updateFormData(e.target.value, "room_number")}>
-                </input><br></br>
-                <label>
-                    In location?
-                    <select onChange={(e) => updateFormData(e.target.value, "in_location")}
-                        style={{ marginLeft: '8px' }}>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </label>
-                <div>
-                    Choose Position:
-                    <button
-                        type="button"
-                        onClick={() => setListening(true)}
-                        style={{ marginLeft: '10px' }}>
-                        Select on Map
-                    </button>
-                </div>
-                <div>
-                    <button
-                        type="button"
-                        onClick={() => handleSubmit()}
-                        style={{ marginLeft: '10px' }}>
-                        Submit
-                    </button>
-                </div>
-            </form>}
-        </div >)
+        <div className="container">
+            <div className="form-box">
+                <h3>Add Location Details</h3>
+                <form className="form-content">
+                    <input
+                        type="text"
+                        placeholder="Building Name"
+                        onBlur={(e) => updateFormData(e.target.value, 'building_name')}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Room Number/Location"
+                        onBlur={(e) => updateFormData(e.target.value, 'room_number')}
+                    />
+                    <label>
+                        In location?
+                        <select onChange={(e) => updateFormData(e.target.value, 'in_location')}>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </label>
+                    <div className="select-button">
+                        <button type="button" onClick={() => setListening(true)}>
+                            Select on Map
+                        </button>
+                    </div>
+                    <div className="select-button">
+                        <button type="button" onClick={() => handleSubmit()}>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 }
 
 export default AddBucketButton
