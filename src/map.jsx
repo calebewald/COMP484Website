@@ -33,6 +33,9 @@ const Map = ({ editMode, listening, setListening, setLatLng, selectedMarker, set
         //     </Marker>
         // ));
 
+
+
+
         return bucketData.map((bucket, index) => {
             return (<Marker
                 key={index}
