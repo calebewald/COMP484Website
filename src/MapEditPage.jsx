@@ -1,4 +1,3 @@
-import AddBucketButton from "./AddBucketButton"
 import Map from "./map.jsx"
 import { useState, useEffect } from "react"
 import EditLocationButton from './EditMarkerButton.jsx'

@@ -5,11 +5,15 @@ import MapPage from './MapPage.jsx'
 import MapAddPage from './MapAddPage.jsx'
 import MapEditPage from './MapEditPage.jsx'
 import MapDeletePage from './MapDeletePage.jsx'
+import SignUpPage from './SignUpPage.jsx'
+import SignInPage from './SignInPage.jsx'
 
 function App() {
 
   const htmlroutes = [
     { path: '/', component: <MapPage /> },
+    { path: '/sign_up', component: <SignUpPage /> },
+    { path: '/sign_in', component: <SignInPage /> },
     { path: '/map_edit', component: <MapEditPage /> },
     { path: '/map_add', component: <MapAddPage /> },
     { path: '/map_delete', component: <MapDeletePage /> }
