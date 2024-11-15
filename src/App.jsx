@@ -10,7 +10,6 @@ function App() {
 
   const htmlroutes = [
     { path: '/', component: <MapPage /> },
-    { path: '/map', component: <MapPage /> },
     { path: '/map_edit', component: <MapEditPage /> },
     { path: '/map_add', component: <MapAddPage /> },
     { path: '/map_delete', component: <MapDeletePage /> }

@@ -66,6 +66,11 @@ const AddBucketButton = ({ setListening, latlng }) => {
         <div className="container">
             <div className="form-box">
                 <h3>Add Location Details</h3>
+                <div className="select-button">
+                    <button type="button" onClick={() => setListening(true)}>
+                        (Select Location on Map)
+                    </button>
+                </div>
                 <form className="form-content">
                     <input
                         type="text"
@@ -84,11 +89,6 @@ const AddBucketButton = ({ setListening, latlng }) => {
                             <option value="no">No</option>
                         </select>
                     </label>
-                    <div className="select-button">
-                        <button type="button" onClick={() => setListening(true)}>
-                            Select on Map
-                        </button>
-                    </div>
                     <div className="select-button">
                         <button type="button" onClick={() => handleSubmit()}>
                             Submit

@@ -95,13 +95,12 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
             <form className="form-box">
                 <div className="form-section">
                     <h3>Edit Marker Details</h3>
-                    Choose Marker:
                     <button
                         type="button"
                         onClick={() => setEditMode(true)}
                         className="select-button"
                     >
-                        (Select on Map)
+                        (Select Marker to Edit)
                     </button>
 
                     <input
