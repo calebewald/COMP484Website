@@ -1,4 +1,15 @@
-/* App.css */
+.route-ribbon-container {
+    display: flex;
+    justify-content: center;
+    /* Center buttons horizontally */
+    background-color: #f8f8f8;
+    /* Optional: background color for the ribbon */
+    padding: 10px;
+    /* Optional: spacing around buttons */
+    border-bottom: 1px solid #ccc;
+    /* Optional: subtle separation */
+}
+
 
 .main-container {
     display: flex;
@@ -10,6 +21,7 @@
     height: 100vh;
     /* Full viewport height */
     padding: 10px;
+
 }
 
 .main-container>* {

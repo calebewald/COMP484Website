@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient.js'
 import ErrorMessage from './ErrorMessage.jsx'
+import RouteRibbon from './RouteRibbon.jsx'
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -59,6 +60,7 @@ const SignUp = () => {
 
     return (
         <div className="container">
+            <RouteRibbon />
             <div className="form-box">
                 <h3>Sign Up</h3>
                 <div className="select-button">

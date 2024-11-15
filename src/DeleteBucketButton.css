@@ -50,7 +50,7 @@
 
 /* Submit and select buttons styling */
 .form-box button {
-    background-color: #28a745;
+    background-color: #4D7644;
     /* Green button */
     color: white;
     border: none;
@@ -59,7 +59,7 @@
 }
 
 .form-box button:hover {
-    background-color: #218838;
+    background-color: #4D7644;
     /* Darker green on hover */
 }
 

@@ -17,8 +17,8 @@ function App() {
     { path: '/', component: <MapPage /> },
     { path: '/sign_up', component: <SignUpPage /> },
 
-    // { path: '/sign_in', component: <SignInPage /> },
-    { path: '/sign_in', component: <LoginPage /> },
+    { path: '/sign_in', component: <SignInPage /> },
+    // { path: '/sign_in', component: <LoginPage /> },
 
     { path: '/map_edit', component: <MapEditPage /> },
     { path: '/map_add', component: <MapAddPage /> },

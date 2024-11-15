@@ -2,6 +2,8 @@ import Map from "./map.jsx"
 import { useState, useEffect } from "react"
 import CompostCounter from './CompostCounter.jsx'
 import './Page.css'
+import RouteRibbon from './RouteRibbon.jsx'
+
 
 const MapPage = () => {
 
@@ -12,11 +14,14 @@ const MapPage = () => {
     const [GrayMap, setGrayMap] = useState(false)
 
     return (
-        <div className="main-container">
-            <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
-            <CompostCounter />
-            {/* <AddBucketButton setListening={setListening} latlng={latlng} />
+        <div>
+            <RouteRibbon />
+            <div className="main-container">
+                <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
+                <CompostCounter />
+                {/* <AddBucketButton setListening={setListening} latlng={latlng} />
             <EditLocationButton editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} setListening={setListening} latlng={latlng} /> */}
+            </div>
         </div>
     )
 }

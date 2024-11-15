@@ -2,6 +2,8 @@ import Map from "./map.jsx"
 import { useState, useEffect } from "react"
 import DeleteBucketButton from "./DeleteBucketButton.jsx"
 import './Page.css'
+import RouteRibbon from './RouteRibbon.jsx'
+
 
 const MapEditPage = () => {
 
@@ -12,9 +14,12 @@ const MapEditPage = () => {
     const [GrayMap, setGrayMap] = useState(false)
 
     return (
-        <div className="main-container">
-            <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
-            <DeleteBucketButton selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} editMode={editMode} setEditMode={setEditMode} setGrayMap={setGrayMap} />
+        <div>
+            <RouteRibbon />
+            <div className="main-container">
+                <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
+                <DeleteBucketButton selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} editMode={editMode} setEditMode={setEditMode} setGrayMap={setGrayMap} />
+            </div>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from './supabaseClient.js'
 import ErrorMessage from './ErrorMessage.jsx'
+import RouteRibbon from './RouteRibbon.jsx'
 
 const SignInPage = () => {
     const [formData, setFormData] = useState({
@@ -32,12 +33,12 @@ const SignInPage = () => {
             password: formData.form_password,
         });
 
-        if (error.message === 'Invalid login credentials') {
-            console.log(error.message)
-            setError("Invalid login credentials")
-        } else {
-            console.log('Sign-In successful:', data);
-        }
+        // if (error.message === 'Invalid login credentials') {
+        //     console.log(error.message)
+        //     setError("Invalid login credentials")
+        // } else {
+        //     console.log('Sign-In successful:', data);
+        // }
     }
 
     useEffect(() => {
@@ -47,6 +48,7 @@ const SignInPage = () => {
 
     return (
         <div className="container">
+            <RouteRibbon />
             <div className="form-box">
                 <h3>Sign In</h3>
                 <div className="select-button">
