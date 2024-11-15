@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react"
 import { supabase } from './supabaseClient.js'
 import './EditMarkerButton.css'
+import ErrorMessage from './ErrorMessage.jsx'
+import LoadingMessage from "./LoadingMessage.jsx"
 
 const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEditMode, setListening, latlng }) => {
     const [clicked, setClicked] = useState(false)
@@ -11,6 +13,8 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
         form_lat: undefined,
         form_lng: undefined,
     })
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const building_name = useRef(null);
     const room_number = useRef(null);
@@ -33,17 +37,19 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
     }
 
     function handleSubmit() {
-        // implement set loading
+        setLoading(true)
+        setError('')
 
         console.log(Object.values(formData).some(val => !val))
 
         // check validity of form
         if (Object.values(formData).some(val => !val)) {
+            setError("1 or more fields are empty")
             return
-            // implement set error message "one or more fields are empty"
         }
         setBucketData()
         setClicked(!clicked)
+        window.location.reload();
     }
 
     async function setBucketData() {
@@ -131,6 +137,8 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
                     <button type="button" onClick={() => handleSubmit()}>
                         Submit Changes
                     </button>
+                    <ErrorMessage error={error} />
+                    <LoadingMessage loading={loading} />
                 </div>
             </form>
         </div>

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient.js'
 import "./AddBucketButton.css"
+import ErrorMessage from './ErrorMessage.jsx'
+import LoadingMessage from './LoadingMessage.jsx'
 
-const AddBucketButton = ({ setListening, latlng }) => {
+const AddBucketButton = ({ setListening, latlng, setGrayMap }) => {
     const [formData, setFormData] = useState({
         form_building_name: undefined,
         form_room_number: undefined,
@@ -10,6 +12,8 @@ const AddBucketButton = ({ setListening, latlng }) => {
         form_lat: undefined,
         form_lng: undefined,
     })
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     function updateFormData(data, dataType) {
         switch (dataType) {
@@ -26,12 +30,14 @@ const AddBucketButton = ({ setListening, latlng }) => {
     }
 
     function handleSubmit() {
-        // implement set loading
+        setError('')
+        setLoading(true)
 
         console.log(Object.values(formData).includes(undefined))
 
         // check validity of form
         if (Object.values(formData).includes(undefined)) {
+            setError("1 or more fields are empty")
             return
             // implement set error message "one or more fields are empty"
         }
@@ -49,6 +55,8 @@ const AddBucketButton = ({ setListening, latlng }) => {
                 lng: formData.form_lng,
             }])
             .single();
+        setLoading(false)
+        window.location.reload();
     }
 
     // debug
@@ -67,7 +75,10 @@ const AddBucketButton = ({ setListening, latlng }) => {
             <div className="form-box">
                 <h3>Add Location Details</h3>
                 <div className="select-button">
-                    <button type="button" onClick={() => setListening(true)}>
+                    <button type="button" onClick={() => {
+                        setListening(true)
+                        setGrayMap(true)
+                    }}>
                         (Select Location on Map)
                     </button>
                 </div>
@@ -94,6 +105,9 @@ const AddBucketButton = ({ setListening, latlng }) => {
                             Submit
                         </button>
                     </div>
+
+                    <ErrorMessage error={error} />
+                    <LoadingMessage loading={loading} />
                 </form>
             </div>
         </div>

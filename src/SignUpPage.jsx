@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient.js'
+import ErrorMessage from './ErrorMessage.jsx'
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -7,6 +8,8 @@ const SignUp = () => {
         form_password1: "",
         form_password2: "",
     })
+    const [error, setError] = useState('')
+
 
     function updateFormData(data, dataType) {
         switch (dataType) {
@@ -24,13 +27,19 @@ const SignUp = () => {
 
     async function signUpWithEmail(email, password) {
         if (Object.values(formData).some(value => !value)) {
+            setError("1 or more fields are empty")
             return
             // add error empty fields
         }
 
         if (formData.form_password1 != formData.form_password2) {
+            setError("Passwords don't match")
             return
             // add error passwords don't match
+        }
+
+        if (formData.form_password1.length <= 5) {
+            setError("Password must be at least 6 characters")
         }
 
         const { data, error } = await supabase.auth.signUp({
@@ -75,9 +84,11 @@ const SignUp = () => {
                             Submit
                         </button>
                     </div>
+
+                    <ErrorMessage error={error} />
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

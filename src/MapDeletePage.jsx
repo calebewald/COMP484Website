@@ -9,11 +9,12 @@ const MapEditPage = () => {
     const [editMode, setEditMode] = useState(false)
     const [latlng, setLatLng] = useState({})
     const [selectedMarker, setSelectedMarker] = useState(null)
+    const [GrayMap, setGrayMap] = useState(false)
 
     return (
         <div className="main-container">
-            <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} />
-            <DeleteBucketButton selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} editMode={editMode} setEditMode={setEditMode} />
+            <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
+            <DeleteBucketButton selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} editMode={editMode} setEditMode={setEditMode} setGrayMap={setGrayMap} />
         </div>
     )
 }

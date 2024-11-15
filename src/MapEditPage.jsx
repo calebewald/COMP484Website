@@ -1,6 +1,6 @@
 import Map from "./map.jsx"
 import { useState, useEffect } from "react"
-import EditLocationButton from './EditMarkerButton.jsx'
+import EditMarkerButton from './EditMarkerButton.jsx'
 import './Page.css'
 
 const MapEditPage = () => {
@@ -9,12 +9,13 @@ const MapEditPage = () => {
     const [editMode, setEditMode] = useState(false)
     const [latlng, setLatLng] = useState({})
     const [selectedMarker, setSelectedMarker] = useState(null)
+    const [GrayMap, setGrayMap] = useState(false)
 
     return (
         <div className="main-container">
-            <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} />
+            <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
             {/* <AddBucketButton setListening={setListening} latlng={latlng} /> */}
-            <EditLocationButton editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} setListening={setListening} latlng={latlng} />
+            <EditMarkerButton editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} setListening={setListening} latlng={latlng} setGrayMap={setGrayMap} />
         </div>
     )
 }

@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import { supabase } from './supabaseClient.js'
 
 
-const Map = ({ editMode, listening, setListening, setLatLng, selectedMarker, setSelectedMarker }) => {
+const Map = ({ editMode, setEditMode, listening, setListening, setLatLng, selectedMarker, setSelectedMarker }) => {
     const [bucketData, setBucketData] = useState([])
 
     // This component listens for clicks on the map
@@ -60,6 +60,7 @@ const Map = ({ editMode, listening, setListening, setLatLng, selectedMarker, set
 
     function handleEditMarker(id) {
         setSelectedMarker(id)
+        setEditMode(false)
     }
 
     // on load get all bucket info from db and update map accordingly

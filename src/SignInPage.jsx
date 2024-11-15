@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from './supabaseClient.js'
-
+import ErrorMessage from './ErrorMessage.jsx'
 
 const SignInPage = () => {
-
     const [formData, setFormData] = useState({
         form_email: "",
         form_password: "",
     })
+    const [error, setError] = useState('')
 
     function updateFormData(data, dataType) {
         switch (dataType) {
@@ -22,6 +22,7 @@ const SignInPage = () => {
 
     async function signInWithEmail(email, password) {
         if (Object.values(formData).some(value => !value)) {
+            setError("1 or more fields are empty")
             return
             // add error empty fields
         }
@@ -31,8 +32,9 @@ const SignInPage = () => {
             password: formData.form_password,
         });
 
-        if (error) {
-            console.error('Sign-In error:', error.message);
+        if (error.message === 'Invalid login credentials') {
+            console.log(error.message)
+            setError("Invalid login credentials")
         } else {
             console.log('Sign-In successful:', data);
         }
@@ -65,6 +67,7 @@ const SignInPage = () => {
                             Submit
                         </button>
                     </div>
+                    <ErrorMessage error={error} />
                 </form>
             </div>
         </div>
