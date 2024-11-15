@@ -8,12 +8,18 @@ import MapDeletePage from './MapDeletePage.jsx'
 import SignUpPage from './SignUpPage.jsx'
 import SignInPage from './SignInPage.jsx'
 
+import LoginPage from './LoginPage.jsx'
+import './LoginPage.css'
+
 function App() {
 
   const htmlroutes = [
     { path: '/', component: <MapPage /> },
     { path: '/sign_up', component: <SignUpPage /> },
-    { path: '/sign_in', component: <SignInPage /> },
+
+    // { path: '/sign_in', component: <SignInPage /> },
+    { path: '/sign_in', component: <LoginPage /> },
+
     { path: '/map_edit', component: <MapEditPage /> },
     { path: '/map_add', component: <MapAddPage /> },
     { path: '/map_delete', component: <MapDeletePage /> }
