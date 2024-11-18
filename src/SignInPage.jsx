@@ -38,39 +38,53 @@ const SignInPage = () => {
             setError("Invalid login credentials")
         } else {
             console.log('Sign-In successful:', data);
+            window.location.reload();
         }
     }
 
-    useEffect(() => {
-        console.log(JSON.stringify(formData, null, 2))
-    }, [formData])
+    async function signOut() {
+        const { error } = await supabase.auth.signOut();
+
+        if (error) {
+            console.error('Error signing out:', error.message);
+        } else {
+            console.log('User signed out successfully');
+            // Reload the page only if sign-out is successful
+            window.location.reload();
+        }
+    }
 
 
     return (
-        <div className="container">
+        <div>
             <RouteRibbon />
-            <div className="form-box">
-                <h3>Sign In</h3>
-                <div className="select-button">
+            <div className="main-container">
+                <div className="form-box">
+                    <h3>Sign In</h3>
+                    <form className="form-content">
+                        <input
+                            type="text"
+                            placeholder="Email"
+                            onBlur={(e) => updateFormData(e.target.value, 'email')}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            onBlur={(e) => updateFormData(e.target.value, 'password')}
+                        />
+                        <div className="select-button">
+                            <button type="button" onClick={() => signInWithEmail()}>
+                                Submit
+                            </button>
+                        </div>
+                        <div className="select-button">
+                            <button type="button" onClick={() => signOut()}>
+                                Sign Out (for testing purposes)
+                            </button>
+                        </div>
+                        <ErrorMessage error={error} />
+                    </form>
                 </div>
-                <form className="form-content">
-                    <input
-                        type="text"
-                        placeholder="Email"
-                        onBlur={(e) => updateFormData(e.target.value, 'email')}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        onBlur={(e) => updateFormData(e.target.value, 'password')}
-                    />
-                    <div className="select-button">
-                        <button type="button" onClick={() => signInWithEmail()}>
-                            Submit
-                        </button>
-                    </div>
-                    <ErrorMessage error={error} />
-                </form>
             </div>
         </div>
     );

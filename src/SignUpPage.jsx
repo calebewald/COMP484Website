@@ -59,38 +59,40 @@ const SignUp = () => {
     }, [formData])
 
     return (
-        <div className="container">
+        <div>
             <RouteRibbon />
-            <div className="form-box">
-                <h3>Sign Up</h3>
-                <div className="select-button">
-                </div>
-                <form className="form-content">
-                    <input
-                        type="text"
-                        placeholder="Email"
-                        onBlur={(e) => updateFormData(e.target.value, 'email')}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        onBlur={(e) => updateFormData(e.target.value, 'password1')}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Re-Enter Password"
-                        onBlur={(e) => updateFormData(e.target.value, 'password2')}
-                    />
+            <div className="main-container">
+                <div className="form-box">
+                    <h3>Sign Up</h3>
                     <div className="select-button">
-                        <button type="button" onClick={() => signUpWithEmail()}>
-                            Submit
-                        </button>
                     </div>
+                    <form className="form-content">
+                        <input
+                            type="text"
+                            placeholder="Email"
+                            onBlur={(e) => updateFormData(e.target.value, 'email')}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            onBlur={(e) => updateFormData(e.target.value, 'password1')}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Re-Enter Password"
+                            onBlur={(e) => updateFormData(e.target.value, 'password2')}
+                        />
+                        <div className="select-button">
+                            <button type="button" onClick={() => signUpWithEmail()}>
+                                Submit
+                            </button>
+                        </div>
 
-                    <ErrorMessage error={error} />
-                </form>
+                        <ErrorMessage error={error} />
+                    </form>
+                </div >
             </div >
-        </div >
+        </div>
     );
 };
 

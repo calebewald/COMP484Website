@@ -4,7 +4,6 @@ import EditMarkerButton from './EditMarkerButton.jsx'
 import './Page.css'
 import RouteRibbon from './RouteRibbon.jsx'
 
-
 const MapEditPage = () => {
 
     const [listening, setListening] = useState(false)
