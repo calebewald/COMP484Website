@@ -15,6 +15,7 @@ function App() {
 
   const htmlroutes = [
     { path: '/', component: <MapPage /> },
+    { path: '/map', component: <MapPage /> },
     { path: '/sign_up', component: <SignUpPage /> },
 
     { path: '/sign_in', component: <SignInPage /> },

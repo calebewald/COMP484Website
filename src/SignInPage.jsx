@@ -33,12 +33,12 @@ const SignInPage = () => {
             password: formData.form_password,
         });
 
-        // if (error.message === 'Invalid login credentials') {
-        //     console.log(error.message)
-        //     setError("Invalid login credentials")
-        // } else {
-        //     console.log('Sign-In successful:', data);
-        // }
+        if (error === 'Invalid login credentials') {
+            console.log(error)
+            setError("Invalid login credentials")
+        } else {
+            console.log('Sign-In successful:', data);
+        }
     }
 
     useEffect(() => {
