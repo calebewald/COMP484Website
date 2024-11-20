@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient.js'
-import "./AddBucketButton.css"
 import ErrorMessage from './ErrorMessage.jsx'
 import LoadingMessage from './LoadingMessage.jsx'
 
@@ -74,15 +73,13 @@ const AddBucketButton = ({ setListening, latlng, setGrayMap }) => {
         <div className="container">
             <div className="form-box">
                 <h3>Add Location Details</h3>
-                <div className="select-button">
+                <form className="form-content">
                     <button type="button" onClick={() => {
                         setListening(true)
                         setGrayMap(true)
                     }}>
                         (Select Location on Map)
                     </button>
-                </div>
-                <form className="form-content">
                     <input
                         type="text"
                         placeholder="Building Name"
@@ -100,11 +97,9 @@ const AddBucketButton = ({ setListening, latlng, setGrayMap }) => {
                             <option value="no">No</option>
                         </select>
                     </label>
-                    <div className="select-button">
-                        <button type="button" onClick={() => handleSubmit()}>
-                            Submit
-                        </button>
-                    </div>
+                    <button type="button" onClick={() => handleSubmit()}>
+                        Submit
+                    </button>
 
                     <ErrorMessage error={error} />
                     <LoadingMessage loading={loading} />

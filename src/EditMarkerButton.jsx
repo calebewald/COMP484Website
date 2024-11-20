@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react"
 import { supabase } from './supabaseClient.js'
-import './EditMarkerButton.css'
 import ErrorMessage from './ErrorMessage.jsx'
 import LoadingMessage from "./LoadingMessage.jsx"
 
@@ -112,44 +111,46 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
             <form className="form-box">
                 <div className="form-section">
                     <h3>Edit Marker Details</h3>
-                    <button
-                        type="button"
-                        onClick={() => setEditMode(true)}
-                        className="select-button"
-                    >
-                        (Select Marker to Edit)
-                    </button>
-
-                    <input
-                        type="text"
-                        placeholder="Building Name"
-                        onBlur={(e) => updateFormData(e.target.value, "building_name")}
-                        disabled={selectedMarker == null}
-                        ref={building_name}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Room Number/Location"
-                        onBlur={(e) => updateFormData(e.target.value, "room_number")}
-                        disabled={selectedMarker == null}
-                        ref={room_number}
-                    />
-                    <label className="form-section-inline">
-                        In location?
-                        <select
-                            onChange={(e) => updateFormData(e.target.value, "in_location")}
-                            disabled={selectedMarker == null}
-                            ref={in_location}
+                    <form className="form-content">
+                        <button
+                            type="button"
+                            onClick={() => setEditMode(true)}
+                            className="select-button"
                         >
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </label>
-                    <button type="button" onClick={() => handleSubmit()}>
-                        Submit Changes
-                    </button>
-                    <ErrorMessage error={error} />
-                    <LoadingMessage loading={loading} />
+                            (Select Marker to Edit)
+                        </button>
+
+                        <input
+                            type="text"
+                            placeholder="Building Name"
+                            onBlur={(e) => updateFormData(e.target.value, "building_name")}
+                            disabled={selectedMarker == null}
+                            ref={building_name}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Room Number/Location"
+                            onBlur={(e) => updateFormData(e.target.value, "room_number")}
+                            disabled={selectedMarker == null}
+                            ref={room_number}
+                        />
+                        <label className="form-section-inline">
+                            In location?
+                            <select
+                                onChange={(e) => updateFormData(e.target.value, "in_location")}
+                                disabled={selectedMarker == null}
+                                ref={in_location}
+                            >
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </label>
+                        <button type="button" onClick={() => handleSubmit()}>
+                            Submit Changes
+                        </button>
+                        <ErrorMessage error={error} />
+                        <LoadingMessage loading={loading} />
+                    </form>
                 </div>
             </form>
         </div>

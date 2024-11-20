@@ -1,8 +1,8 @@
 import Map from "./map.jsx"
 import { useState, useEffect } from "react"
 import CompostCounter from './CompostCounter.jsx'
-import './Page.css'
 import RouteRibbon from './RouteRibbon.jsx'
+import PageTopper from './PageTopper.jsx'
 
 
 const MapPage = () => {
@@ -15,7 +15,7 @@ const MapPage = () => {
 
     return (
         <div>
-            <RouteRibbon />
+            <PageTopper />
             <div className="main-container">
                 <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
                 <CompostCounter />

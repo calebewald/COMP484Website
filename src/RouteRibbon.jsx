@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient.js'
-import './RouteRibbon.css'
 
 
 const RouteRibbon = () => {
@@ -24,9 +23,9 @@ const RouteRibbon = () => {
     })
 
     return (
-        <div className={'route-ribbon-container'}>
-            <button onClick={() => navigate("/sign_up")}>Sign Up</button>
-            <button onClick={() => navigate("/sign_in")}>Sign In</button>
+        <div >
+            {!isLoggedIn && <><button onClick={() => navigate("/sign_up")}>Sign Up</button>
+                <button onClick={() => navigate("/sign_in")}>Sign In</button></>}
             <button onClick={() => navigate("/")}>Map</button>
             {isLoggedIn && <><button onClick={() => navigate("/map_add")}>Add Markers</button>
                 <button onClick={() => navigate("/map_edit")}>Edit Markers</button>

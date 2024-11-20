@@ -1,9 +1,7 @@
 import Map from "./map.jsx"
 import { useState, useEffect } from "react"
 import DeleteBucketButton from "./DeleteBucketButton.jsx"
-import './Page.css'
-import RouteRibbon from './RouteRibbon.jsx'
-
+import PageTopper from './PageTopper.jsx'
 
 const MapEditPage = () => {
 
@@ -15,7 +13,7 @@ const MapEditPage = () => {
 
     return (
         <div>
-            <RouteRibbon />
+            <PageTopper />
             <div className="main-container">
                 <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
                 <DeleteBucketButton selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} editMode={editMode} setEditMode={setEditMode} setGrayMap={setGrayMap} />

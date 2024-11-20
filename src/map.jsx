@@ -1,8 +1,8 @@
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Tooltip } from 'react-leaflet'
 import { useState, useEffect } from 'react'
 import 'leaflet/dist/leaflet.css'
 import { supabase } from './supabaseClient.js'
-
+import { latLng } from 'leaflet';
 
 const Map = ({ editMode, setEditMode, listening, setListening, setLatLng, selectedMarker, setSelectedMarker }) => {
     const [bucketData, setBucketData] = useState([])
@@ -11,10 +11,6 @@ const Map = ({ editMode, setEditMode, listening, setListening, setLatLng, select
     const LocationMarkers = () => {
         useMapEvents({
             click(e) {
-                // setPopupPositions((prevPositions) => [
-                //     ...prevPositions, // Add new position to the array
-                //     e.latlng
-                // ]);
                 if (listening) {
                     setLatLng(e.latlng)
                     setListening(false)
@@ -49,11 +45,12 @@ const Map = ({ editMode, setEditMode, listening, setListening, setLatLng, select
                     }
                 }}>
                 <Popup>
-                    building_name: {bucket.building_name} <br />
-                    room_number: {bucket.room_number} <br />
-                    in_location: {bucket.in_location ? "Yes" : "No"} <br />
-                    lat, lng: {bucket.lat}, {bucket.lng} <br />
+                    Building Name: {bucket.building_name} <br />
+                    Room Number: {bucket.room_number} <br />
+                    In Location?: {bucket.in_location ? "Yes" : "No"} <br />
                 </Popup>
+                {editMode && <Tooltip>Click To Select</Tooltip>}
+
             </Marker >)
         })
     };
@@ -84,7 +81,7 @@ const Map = ({ editMode, setEditMode, listening, setListening, setLatLng, select
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <LocationMarkers />
-            {listening && (
+            {(listening || editMode) && (
                 <div
                     style={{
                         position: 'absolute',
@@ -94,6 +91,7 @@ const Map = ({ editMode, setEditMode, listening, setListening, setLatLng, select
                         bottom: 0,
                         backgroundColor: 'rgba(0, 0, 0, 0.2)',
                         zIndex: 1000,
+                        pointerEvents: 'none',  // Allow clicks to pass through
                     }}
                 />
             )}

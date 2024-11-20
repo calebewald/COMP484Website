@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient.js'
-import './CompostCounter.css';
 
 const CompostCounter = () => {
     const [pounds, setPounds] = useState()

@@ -1,8 +1,8 @@
 import AddBucketButton from "./AddBucketButton"
 import Map from "./map.jsx"
 import { useState, useEffect } from "react"
-import './Page.css'
 import RouteRibbon from './RouteRibbon.jsx'
+import PageTopper from './PageTopper.jsx'
 
 const MapAddPage = () => {
 
@@ -13,8 +13,8 @@ const MapAddPage = () => {
     const [GrayMap, setGrayMap] = useState(false)
 
     return (
-        <div>
-            <RouteRibbon />
+        <div className='page-container'>
+            <PageTopper />
             <div className="main-container">
                 <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
                 <AddBucketButton setListening={setListening} latlng={latlng} setGrayMap={setGrayMap} />

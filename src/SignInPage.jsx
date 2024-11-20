@@ -3,6 +3,8 @@ import { supabase } from './supabaseClient.js'
 import ErrorMessage from './ErrorMessage.jsx'
 import RouteRibbon from './RouteRibbon.jsx'
 import HornetLogo from './assets/K-Color-2.jpg'
+import { useNavigate } from "react-router-dom";
+import PageTopper from './PageTopper.jsx'
 
 const SignInPage = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +12,7 @@ const SignInPage = () => {
         form_password: "",
     })
     const [error, setError] = useState('')
+    const navigate = useNavigate()
 
     function updateFormData(data, dataType) {
         switch (dataType) {
@@ -39,7 +42,7 @@ const SignInPage = () => {
             setError("Invalid login credentials")
         } else {
             console.log('Sign-In successful:', data);
-            window.location.reload();
+            navigate("/map")
         }
     }
 
@@ -68,12 +71,11 @@ const SignInPage = () => {
 
 
     return (
-        <div>
-            <RouteRibbon />
-            <div className="main-container">
+        <div className={'page-container'}>
+            <div className="container">
                 <div className="form-box">
                     <h3>Sign In</h3>
-                    <img src={HornetLogo}></img>
+                    {/* <img src={HornetLogo}></img> */}
                     <form className="form-content">
                         <input
                             type="text"
@@ -90,16 +92,7 @@ const SignInPage = () => {
                                 Submit
                             </button>
                         </div>
-                        <div className="select-button">
-                            <button type="button" onClick={() => signOut()}>
-                                Sign Out (for testing purposes)
-                            </button>
-                        </div>
-                        <div className="select-button">
-                            <button type="button" onClick={() => printCurrentSessionInfo()}>
-                                Get Session info
-                            </button>
-                        </div>
+                        <label>Or Sign up</label>
                         <ErrorMessage error={error} />
                     </form>
                 </div>

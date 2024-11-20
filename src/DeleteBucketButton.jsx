@@ -1,4 +1,3 @@
-import "./DeleteBucketButton.css"
 import { supabase } from './supabaseClient.js'
 import { useEffect, useState } from 'react'
 import ErrorMessage from './ErrorMessage.jsx'
