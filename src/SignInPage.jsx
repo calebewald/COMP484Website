@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from './supabaseClient.js'
 import ErrorMessage from './ErrorMessage.jsx'
 import RouteRibbon from './RouteRibbon.jsx'
+import HornetLogo from './assets/K-Color-2.jpg'
 
 const SignInPage = () => {
     const [formData, setFormData] = useState({
@@ -54,6 +55,17 @@ const SignInPage = () => {
         }
     }
 
+    async function printCurrentSessionInfo() {
+        const { data: session, error } = await supabase.auth.getSession();
+        if (error) {
+            console.error('Error fetching session info:', error);
+            return null;
+        }
+
+        console.log(JSON.stringify(session, null, 2))
+        return session;
+    }
+
 
     return (
         <div>
@@ -61,6 +73,7 @@ const SignInPage = () => {
             <div className="main-container">
                 <div className="form-box">
                     <h3>Sign In</h3>
+                    <img src={HornetLogo}></img>
                     <form className="form-content">
                         <input
                             type="text"
@@ -80,6 +93,11 @@ const SignInPage = () => {
                         <div className="select-button">
                             <button type="button" onClick={() => signOut()}>
                                 Sign Out (for testing purposes)
+                            </button>
+                        </div>
+                        <div className="select-button">
+                            <button type="button" onClick={() => printCurrentSessionInfo()}>
+                                Get Session info
                             </button>
                         </div>
                         <ErrorMessage error={error} />

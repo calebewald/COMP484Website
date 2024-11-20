@@ -45,15 +45,21 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
         // check validity of form
         if (Object.values(formData).some(val => !val)) {
             setError("1 or more fields are empty")
+            setLoading(false)
             return
         }
-        setBucketData()
+        editBucketData()
         setClicked(!clicked)
-        window.location.reload();
     }
 
-    async function setBucketData() {
-        const { data, error } = await supabase
+    async function editBucketData() {
+
+        const deletePromise = supabase
+            .from('bucket_locations')
+            .delete()
+            .eq('id', selectedMarker)
+
+        const insertPromise = supabase
             .from('bucket_locations')
             .insert([{
                 building_name: formData.form_building_name,
@@ -62,37 +68,42 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
                 lat: formData.form_lat,
                 lng: formData.form_lng,
             }])
+            .single()
+
+        const [insertResult, deleteResult] = await Promise.all([insertPromise, deletePromise]);
+
+        window.location.reload();
+    }
+
+    async function fetchBucket() {
+        const { data, error } = await supabase
+            .from('bucket_locations')
+            .select('*')
+            .eq('id', selectedMarker)
             .single();
+        console.log(JSON.stringify(data, null, 2))
+        console.log(!data)
+        if (error || !data) {
+            console.log('entered')
+            return
+        }
+
+        setFormData({
+            form_building_name: data.building_name,
+            form_room_number: data.room_number,
+            form_in_location: data.in_location,
+            form_lat: data.lat,
+            form_lng: data.lng,
+        })
+
+        if (building_name.current && room_number.current && in_location.current) {
+            building_name.current.value = data.building_name
+            room_number.current.value = data.room_number
+            in_location.current.value = data.in_location ? 'yes' : 'no'
+        }
     }
 
     useEffect(() => {
-        async function fetchBucket() {
-            const { data, error } = await supabase
-                .from('bucket_locations')
-                .select('*')
-                .eq('id', selectedMarker)
-                .single();
-            console.log(JSON.stringify(data, null, 2))
-            console.log(!data)
-            if (error || !data) {
-                console.log('entered')
-                return
-            }
-
-            setFormData({
-                form_building_name: data.building_name,
-                form_room_number: data.room_number,
-                form_in_location: data.in_location,
-                form_lat: data.lat,
-                form_lng: data.lng,
-            })
-
-            if (building_name.current && room_number.current && in_location.current) {
-                building_name.current.value = data.building_name
-                room_number.current.value = data.room_number
-                in_location.current.value = data.in_location ? 'yes' : 'no'
-            }
-        }
         fetchBucket()
     }, [selectedMarker])
 
