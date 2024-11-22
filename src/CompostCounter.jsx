@@ -28,7 +28,7 @@ const CompostCounter = () => {
     }, []);
 
     return (
-        <div className="container">
+        <div className="crud-container">
             <form action="/login" method="post" className="form-box">
                 <div className="form-section">
                     <h3>Statistics</h3>

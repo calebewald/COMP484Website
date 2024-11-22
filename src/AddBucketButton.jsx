@@ -33,7 +33,7 @@ const AddBucketButton = ({ listening, setListening, latlng, setGrayMap }) => {
         setLoading(true)
 
         // check validity of form
-        if (Object.values(formData).includes(undefined)) {
+        if (Object.values(formData).some(val => (val === undefined || val == ""))) {
             setError("1 or more fields are empty")
             setLoading(false)
             return

@@ -40,7 +40,8 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
         setError('')
 
         // check validity of form
-        if (Object.values(formData).some(val => (val === undefined || val == ""))) {
+        console.log(JSON.stringify(formData))
+        if (Object.values(formData).some(val => (val === undefined || val === ""))) {
             setError("1 or more fields are empty")
             setLoading(false)
             return
