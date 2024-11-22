@@ -15,7 +15,7 @@ const MapEditPage = () => {
         <div>
             <PageTopper />
             <div className="main-container">
-                <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
+                <Map listening={listening} setListening={setListening} latlng={latlng} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
                 {/* <AddBucketButton setListening={setListening} latlng={latlng} /> */}
                 <EditMarkerButton editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} setListening={setListening} latlng={latlng} setGrayMap={setGrayMap} />
             </div>

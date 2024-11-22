@@ -17,7 +17,7 @@ const MapPage = () => {
         <div>
             <PageTopper />
             <div className="main-container">
-                <Map listening={listening} setListening={setListening} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
+                <Map listening={listening} setListening={setListening} latlng={latlng} setLatLng={setLatLng} editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} GrayMap={GrayMap} />
                 <CompostCounter />
                 {/* <AddBucketButton setListening={setListening} latlng={latlng} />
             <EditLocationButton editMode={editMode} setEditMode={setEditMode} selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker} setListening={setListening} latlng={latlng} /> */}

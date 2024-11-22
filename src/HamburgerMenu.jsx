@@ -16,6 +16,7 @@ const HamburgerMenu = ({ isLoggedIn }) => {
                 <div className="bar"></div>
                 <div className="bar"></div>
             </div>}
+            {!isLoggedIn && <button onClick={() => navigate('/map')}>Map</button>}
 
             {/* Menu that appears on hover */}
             <div

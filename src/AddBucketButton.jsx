@@ -3,7 +3,7 @@ import { supabase } from './supabaseClient.js'
 import ErrorMessage from './ErrorMessage.jsx'
 import LoadingMessage from './LoadingMessage.jsx'
 
-const AddBucketButton = ({ setListening, latlng, setGrayMap }) => {
+const AddBucketButton = ({ listening, setListening, latlng, setGrayMap }) => {
     const [formData, setFormData] = useState({
         form_building_name: undefined,
         form_room_number: undefined,
@@ -32,13 +32,11 @@ const AddBucketButton = ({ setListening, latlng, setGrayMap }) => {
         setError('')
         setLoading(true)
 
-        console.log(Object.values(formData).includes(undefined))
-
         // check validity of form
         if (Object.values(formData).includes(undefined)) {
             setError("1 or more fields are empty")
+            setLoading(false)
             return
-            // implement set error message "one or more fields are empty"
         }
         setBucketData()
     }
@@ -75,7 +73,7 @@ const AddBucketButton = ({ setListening, latlng, setGrayMap }) => {
                 <h3>Add Location Details</h3>
                 <form className="form-content">
                     <button type="button" onClick={() => {
-                        setListening(true)
+                        setListening(!listening)
                         setGrayMap(true)
                     }}>
                         (Select Location on Map)

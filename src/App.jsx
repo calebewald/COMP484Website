@@ -41,11 +41,6 @@ function App() {
         setIsLoggedIn(session.user.role == 'authenticated')
       }
     });
-
-    // Clean up listener on component unmount
-    // return () => {
-    //   authListener?.unsubscribe();
-    // };
   })
 
   return (

@@ -39,8 +39,6 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
         setLoading(true)
         setError('')
 
-        console.log(Object.values(formData).some(val => !val))
-
         // check validity of form
         if (Object.values(formData).some(val => !val)) {
             setError("1 or more fields are empty")
@@ -114,7 +112,7 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
                     <form className="form-content">
                         <button
                             type="button"
-                            onClick={() => setEditMode(true)}
+                            onClick={() => setEditMode(!editMode)}
                             className="select-button"
                         >
                             (Select Marker to Edit)

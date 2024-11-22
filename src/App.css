@@ -30,6 +30,7 @@
   margin-top: 0;
   font-size: 1.2rem;
   color: #333;
+  font: "Helvetica";
   text-align: center;
 }
 
@@ -104,30 +105,20 @@
   /* Align the items at the top */
   height: 90vh;
   /* Full viewport height */
-  padding: 10px;
+  width: 91.5vw;
+  gap: 25px;
+  /* Adds space between the items */
 }
 
 .main-container>* {
   flex: 1;
-  /* Each child takes up an equal amount of space */
-  margin-right: 20px;
-  /* Space between the map and form */
-}
-
-.main-container>*:last-child {
-  margin-right: 0;
-  /* No margin on the last child */
 }
 
 .page-topper-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  /* Optional: adds some padding around */
-
-  /* Space out items evenly */
-
+  width: 91.5vw;
 }
 
 /* Container to hold the hamburger icon and menu */

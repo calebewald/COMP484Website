@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from './supabaseClient.js'
 import ErrorMessage from './ErrorMessage.jsx'
-import RouteRibbon from './RouteRibbon.jsx'
-import HornetLogo from './assets/K-Color-2.jpg'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import PageTopper from './PageTopper.jsx'
 
 const SignInPage = () => {
@@ -12,6 +10,7 @@ const SignInPage = () => {
         form_password: "",
     })
     const [error, setError] = useState('')
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const navigate = useNavigate()
 
     function updateFormData(data, dataType) {
@@ -37,7 +36,7 @@ const SignInPage = () => {
             password: formData.form_password,
         });
 
-        if (error === 'Invalid login credentials') {
+        if (error) {
             console.log(error)
             setError("Invalid login credentials")
         } else {
@@ -69,32 +68,45 @@ const SignInPage = () => {
         return session;
     }
 
+    useEffect(() => {
+        // Optional: Listen for session changes
+        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+            if (session) {
+                setIsLoggedIn(session.user.role == 'authenticated')
+            }
+        });
+    })
+
 
     return (
-        <div className={'page-container'}>
-            <div className="container">
-                <div className="form-box">
-                    <h3>Sign In</h3>
-                    {/* <img src={HornetLogo}></img> */}
-                    <form className="form-content">
-                        <input
-                            type="text"
-                            placeholder="Email"
-                            onBlur={(e) => updateFormData(e.target.value, 'email')}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            onBlur={(e) => updateFormData(e.target.value, 'password')}
-                        />
-                        <div className="select-button">
-                            <button type="button" onClick={() => signInWithEmail()}>
-                                Submit
-                            </button>
-                        </div>
-                        <label>Or Sign up</label>
-                        <ErrorMessage error={error} />
-                    </form>
+        <div>
+            <PageTopper />
+            <div className={'page-container'}>
+                <div className="container">
+                    <div className="form-box">
+                        <h3>Sign In</h3>
+                        <p>For composting staff only. If you aren't a member you don't need an account!</p>
+                        {/* <img src={HornetLogo}></img> */}
+                        <form className="form-content">
+                            <input
+                                type="text"
+                                placeholder="Email"
+                                onBlur={(e) => updateFormData(e.target.value, 'email')}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                onBlur={(e) => updateFormData(e.target.value, 'password')}
+                            />
+                            <div className="select-button">
+                                <button type="button" onClick={() => signInWithEmail()}>
+                                    Submit
+                                </button>
+                            </div>
+                            <label>Don't have an account? <Link to="/sign_up">Sign Up</Link></label>
+                            <ErrorMessage error={error} />
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

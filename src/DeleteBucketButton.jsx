@@ -14,6 +14,7 @@ const DeleteBucketButton = ({ selectedMarker, setSelectedMarker, editMode, setEd
 
         if (!selectedMarker) {
             setError("No marker selected")
+            setLoading(false)
             return
         }
 
@@ -35,7 +36,7 @@ const DeleteBucketButton = ({ selectedMarker, setSelectedMarker, editMode, setEd
             <div className="form-box">
                 <h3>Delete Marker</h3>
                 <form className="form-content">
-                    <button type="button" onClick={() => setEditMode(true)}>(Select Marker)</button>
+                    <button type="button" onClick={() => setEditMode(!editMode)}>(Select Marker)</button>
                     <button type="button" onClick={() => deleteSelectedMarker()}>Delete Marker</button>
                     <ErrorMessage error={error} />
                     <LoadingMessage loading={loading} />
