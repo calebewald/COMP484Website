@@ -25,10 +25,6 @@ const Map = ({ editMode, setEditMode, listening, setListening, latlng, setLatLng
         prefix: 'fa'
     });
 
-
-
-
-
     // This component listens for clicks on the map
     const LocationMarkers = () => {
         useMapEvents({
@@ -55,7 +51,7 @@ const Map = ({ editMode, setEditMode, listening, setListening, latlng, setLatLng
         return bucketData.map((bucket, index) => {
             return (<Marker
                 key={index}
-                icon={greenIcon}
+                icon={bucket.id == selectedMarker ? yellowIcon : greenIcon}
                 position={[bucket.lat, bucket.lng]}
                 eventHandlers={{
                     click: () => {
@@ -96,7 +92,7 @@ const Map = ({ editMode, setEditMode, listening, setListening, latlng, setLatLng
     const centerPosition = [42.29043180177482, -85.59973287209094];
 
     return (
-        <MapContainer center={centerPosition} zoom={17} scrollWheelZoom={false} style={{ height: '90vh', width: '100vw', flex: '1.5', paddingRight: '10px' }}>
+        <MapContainer center={centerPosition} zoom={17} scrollWheelZoom={false} style={{ height: '90vh', width: '100vw', flex: '1.5', paddingRight: '10px', zIndex: 10000 }}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -32,8 +32,8 @@ const DeleteBucketButton = ({ selectedMarker, setSelectedMarker, editMode, setEd
     }, [selectedMarker])
 
     return (
-        <div className="container">
-            <div className="form-box">
+        <div className="crud-container">
+            <div className="crud-form-box">
                 <h3>Delete Marker</h3>
                 <form className="form-content">
                     <button type="button" onClick={() => setEditMode(!editMode)}>(Select Marker)</button>

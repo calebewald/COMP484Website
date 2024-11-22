@@ -3,6 +3,7 @@ import { supabase } from './supabaseClient.js'
 import ErrorMessage from './ErrorMessage.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import PageTopper from './PageTopper.jsx'
+import LoadingMessage from './LoadingMessage.jsx'
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -13,7 +14,10 @@ const SignUp = () => {
     const [error, setError] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
+    const [buttonName, setButtonName] = useState('Submit')
 
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     function updateFormData(data, dataType) {
         switch (dataType) {
@@ -30,23 +34,28 @@ const SignUp = () => {
     }
 
     async function signUpWithEmail(email, password) {
+        setLoading(true)
         if (!isLoggedIn) {
             setError("You must be logged in to create an account")
+            setLoading(false)
             return
         }
 
         if (Object.values(formData).some(value => !value)) {
             setError("1 or more fields are empty")
+            setLoading(false)
             return
         }
 
         if (formData.form_password1 != formData.form_password2) {
             setError("Passwords don't match")
+            setLoading(false)
             return
         }
 
         if (formData.form_password1.length <= 5) {
             setError("Password must be at least 6 characters")
+            setLoading(false)
         }
 
         const { data, error } = await supabase.auth.signUp({
@@ -55,15 +64,24 @@ const SignUp = () => {
         });
         if (error) {
             console.error('Sign-up error:', error.message);
+            setError(error.message)
+            setLoading(false)
         } else {
             console.log('Sign-up successful:', data);
+            setLoading(false)
+            setButtonName("Success!")
+            await sleep(1000);
             navigate('/map')
         }
     }
 
     useEffect(() => {
-        console.log(JSON.stringify(formData, null, 2))
-    }, [formData])
+        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+            if (session) {
+                setIsLoggedIn(session.user.role == 'authenticated')
+            }
+        });
+    })
 
     return (
         <div>
@@ -93,10 +111,11 @@ const SignUp = () => {
                             />
                             <div className="select-button">
                                 <button type="button" onClick={() => signUpWithEmail()}>
-                                    Submit
+                                    {buttonName}
                                 </button>
                             </div>
                             <ErrorMessage error={error} />
+                            <LoadingMessage loading={loading} />
                         </form>
                     </div >
                 </div >

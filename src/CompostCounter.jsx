@@ -6,12 +6,21 @@ const CompostCounter = () => {
     const [buckets, setBuckets] = useState()
 
     async function fetchValues() {
-
         const { data, error } = await supabase
             .from('composting_values')
             .select('*');
-        setPounds(data[0].total_pounds)
-        setBuckets(data[0].num_buckets)
+
+        const bucketArray = data.map((row) => {
+            return row.num_buckets
+        })
+
+        setBuckets(bucketArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0));
+
+        const poundArray = data.map((row) => {
+            return row.total_pounds
+        })
+
+        setPounds(poundArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0));
     }
 
     useEffect(() => {

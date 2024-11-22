@@ -40,7 +40,7 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
         setError('')
 
         // check validity of form
-        if (Object.values(formData).some(val => val === undefined)) {
+        if (Object.values(formData).some(val => (val === undefined || val == ""))) {
             setError("1 or more fields are empty")
             setLoading(false)
             return
@@ -109,8 +109,8 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
     }, [formData])
 
     return (
-        <div className="container">
-            <form className="form-box">
+        <div className="crud-container">
+            <form className="crud-form-box">
                 <div className="form-section">
                     <h3>Edit Marker Details</h3>
                     <form className="form-content">

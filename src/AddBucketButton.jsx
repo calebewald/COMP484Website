@@ -68,8 +68,8 @@ const AddBucketButton = ({ listening, setListening, latlng, setGrayMap }) => {
     }, [latlng])
 
     return (
-        <div className="container">
-            <div className="form-box">
+        <div className="crud-container">
+            <div className="crud-form-box">
                 <h3>Add Location Details</h3>
                 <form className="form-content">
                     <button type="button" onClick={() => {

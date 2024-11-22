@@ -10,12 +10,11 @@ const PageTopper = () => {
     async function logInOrOut() {
         if (isLoggedIn) {
             const { error } = await supabase.auth.signOut();
-            window.location.reload();
+            navigate("/sign_in")
         }
         else {
             navigate("/sign_in")
         }
-
     }
 
     useEffect(() => {
@@ -25,13 +24,16 @@ const PageTopper = () => {
                 setIsLoggedIn(session.user.role == 'authenticated')
             }
         });
-
     })
+
+    useEffect(() => {
+        console.log(isLoggedIn)
+    }, [isLoggedIn])
 
     return (
         <div className="page-topper-container">
             < HamburgerMenu isLoggedIn={isLoggedIn} />
-            <h2>Kalamzoo College Composting Bucket Tracker</h2>
+            <h2>Kalamazoo College Composting Bucket Tracker</h2>
             <button type="button" onClick={() => logInOrOut()}> {isLoggedIn ? 'Log Out' : 'Log In'}</button>
         </div>
     );

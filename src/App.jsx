@@ -13,6 +13,10 @@ import SignInPage from './SignInPage.jsx'
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.style.setProperty('color-scheme', 'light');
+  }
+
   const nonAuthenticatedRouting = [
     { path: '/', component: <MapPage /> },
     { path: '/map', component: <MapPage /> },

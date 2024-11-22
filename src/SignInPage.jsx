@@ -3,6 +3,7 @@ import { supabase } from './supabaseClient.js'
 import ErrorMessage from './ErrorMessage.jsx'
 import { useNavigate, Link } from "react-router-dom";
 import PageTopper from './PageTopper.jsx'
+import LoadingMessage from "./LoadingMessage.jsx";
 
 const SignInPage = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const SignInPage = () => {
     })
     const [error, setError] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     function updateFormData(data, dataType) {
@@ -25,8 +27,10 @@ const SignInPage = () => {
     }
 
     async function signInWithEmail(email, password) {
+        setLoading(true)
         if (Object.values(formData).some(value => !value)) {
             setError("1 or more fields are empty")
+            setLoading(false)
             return
             // add error empty fields
         }
@@ -39,8 +43,10 @@ const SignInPage = () => {
         if (error) {
             console.log(error)
             setError("Invalid login credentials")
+            setLoading(false)
         } else {
             console.log('Sign-In successful:', data);
+            setLoading(false)
             navigate("/map")
         }
     }
@@ -77,6 +83,15 @@ const SignInPage = () => {
         });
     })
 
+    async function logOut() {
+        console.log('hello')
+        if (isLoggedIn) {
+            const { error } = await supabase.auth.signOut();
+            setIsLoggedIn(false)
+            window.location.reload()
+        }
+    }
+
 
     return (
         <div>
@@ -87,25 +102,31 @@ const SignInPage = () => {
                         <h3>Sign In</h3>
                         <p>For composting staff only. If you aren't a member you don't need an account!</p>
                         {/* <img src={HornetLogo}></img> */}
-                        <form className="form-content">
+                        {isLoggedIn && <div>
+                            <label>Currently Logged In</label><button type="button" className={'form-content'} onClick={() => logOut()}>Log Out?</button>
+                        </div>}
+                        {!isLoggedIn && <form className="form-content">
                             <input
                                 type="text"
                                 placeholder="Email"
+                                disabled={isLoggedIn}
                                 onBlur={(e) => updateFormData(e.target.value, 'email')}
                             />
                             <input
                                 type="password"
                                 placeholder="Password"
+                                disabled={isLoggedIn}
                                 onBlur={(e) => updateFormData(e.target.value, 'password')}
                             />
                             <div className="select-button">
-                                <button type="button" onClick={() => signInWithEmail()}>
+                                <button type="button" disabled={isLoggedIn} onClick={() => signInWithEmail()}>
                                     Submit
                                 </button>
                             </div>
                             <label>Don't have an account? <Link to="/sign_up">Sign Up</Link></label>
                             <ErrorMessage error={error} />
-                        </form>
+                            <LoadingMessage loading={loading} />
+                        </form>}
                     </div>
                 </div>
             </div>
