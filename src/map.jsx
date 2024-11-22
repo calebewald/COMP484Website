@@ -6,9 +6,6 @@ import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css';
 import L from 'leaflet';
 import 'leaflet-extra-markers';
 
-
-
-
 const Map = ({ editMode, setEditMode, listening, setListening, latlng, setLatLng, selectedMarker, setSelectedMarker }) => {
     const [bucketData, setBucketData] = useState([])
 

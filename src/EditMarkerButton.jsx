@@ -40,7 +40,7 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
         setError('')
 
         // check validity of form
-        if (Object.values(formData).some(val => !val)) {
+        if (Object.values(formData).some(val => val === undefined)) {
             setError("1 or more fields are empty")
             setLoading(false)
             return
@@ -103,6 +103,10 @@ const EditMarkerButton = ({ selectedMarker, setSelectedMarker, editMode, setEdit
     useEffect(() => {
         fetchBucket()
     }, [selectedMarker])
+
+    useEffect(() => {
+        console.log(formData)
+    }, [formData])
 
     return (
         <div className="container">

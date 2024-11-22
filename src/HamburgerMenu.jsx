@@ -16,13 +16,14 @@ const HamburgerMenu = ({ isLoggedIn }) => {
                 <div className="bar"></div>
                 <div className="bar"></div>
             </div>}
-            {!isLoggedIn && <button onClick={() => navigate('/map')}>Map</button>}
+            {!isLoggedIn && <button onClick={() => navigate('/map')}>Go To Map</button>}
 
             {/* Menu that appears on hover */}
             <div
                 className={`menu ${isOpen ? 'open' : ''}`}
             >
                 <ul>
+                    <li onClick={() => navigate("/sign_up")}>Sign Up</li>
                     <li onClick={() => navigate("/")}>Map</li>
                     <li onClick={() => navigate("/map_add")}>Add Marker</li>
                     <li onClick={() => navigate("/map_edit")}>Edit Marker</li>
