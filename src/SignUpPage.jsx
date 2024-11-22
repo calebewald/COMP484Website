@@ -63,11 +63,9 @@ const SignUp = () => {
             password: formData.form_password1
         });
         if (error) {
-            console.error('Sign-up error:', error.message);
             setError(error.message)
             setLoading(false)
         } else {
-            console.log('Sign-up successful:', data);
             setLoading(false)
             setButtonName("Success!")
             await sleep(1000);

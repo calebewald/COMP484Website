@@ -41,11 +41,9 @@ const SignInPage = () => {
         });
 
         if (error) {
-            console.log(error)
             setError("Invalid login credentials")
             setLoading(false)
         } else {
-            console.log('Sign-In successful:', data);
             setLoading(false)
             navigate("/map")
         }

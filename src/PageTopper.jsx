@@ -26,10 +26,6 @@ const PageTopper = () => {
         });
     })
 
-    useEffect(() => {
-        console.log(isLoggedIn)
-    }, [isLoggedIn])
-
     return (
         <div className="page-topper-container">
             < HamburgerMenu isLoggedIn={isLoggedIn} />

@@ -31,7 +31,6 @@ const Map = ({ editMode, setEditMode, listening, setListening, latlng, setLatLng
             click(e) {
                 if (listening) {
                     setLatLng(e.latlng)
-                    console.log(e.latlng)
                     setListening(false)
                 }
 
@@ -56,7 +55,6 @@ const Map = ({ editMode, setEditMode, listening, setListening, latlng, setLatLng
                 eventHandlers={{
                     click: () => {
                         if (editMode) {
-                            console.log(bucket.id)
                             handleEditMarker(bucket.id);
                         }
                     }

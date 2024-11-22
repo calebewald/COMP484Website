@@ -27,10 +27,6 @@ const DeleteBucketButton = ({ selectedMarker, setSelectedMarker, editMode, setEd
         window.location.reload();
     }
 
-    useEffect(() => {
-        console.log(selectedMarker)
-    }, [selectedMarker])
-
     return (
         <div className="crud-container">
             <div className="crud-form-box">
